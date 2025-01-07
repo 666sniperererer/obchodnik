@@ -1,0 +1,2 @@
+# obchodnik
+Textová hra obchodník
