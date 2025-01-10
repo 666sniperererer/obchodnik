@@ -16,20 +16,20 @@ global mas_batoh
 mas_batoh = 0
 
 hradcany = Lokace("Hradčany",
-                  Predmet("Utopenec", 50, 100),
+                  [Predmet("Utopenec", 50, 100),
                   Predmet("Med", 100, 200),
-                  Predmet("Láhev pálavy", 200,500))
+                  Predmet("Láhev pálavy", 200,500)])
 vaclavak = Lokace("Václavák",
-                  Predmet("Utopenec", 50, 100),
+                  [Predmet("Utopenec", 50, 100),
                   Predmet("Med", 100, 200),
-                  Predmet("Láhev pálavy", 200,500))
+                  Predmet("Láhev pálavy", 200,500)])
 holesovice = Lokace("Holešovice",
-                    Predmet("Utopenec", 50, 100),
+                    [Predmet("Utopenec", 50, 100),
                     Predmet("Med", 100, 200),
-                    Predmet("Láhev pálavy", 200,500))
-vecerka = Lokace("Večerka", "nic", "nic", "nic")
+                    Predmet("Láhev pálavy", 200,500)])
+vecerka = Lokace("Večerka", [])
 
-obchodnik = Osoba("Honza", [], 100, hradcany, 0)
+obchodnik = Osoba(input("Jak se jmenuješ? "), [], 100, hradcany, 0)
 
 #hlavní cyklus
 cinnost = 0
@@ -38,12 +38,15 @@ while cinnost != 99:
     print(f"Nyní jsi v lokaci: {obchodnik.lokace}")
     print(f"V peněžence máš {obchodnik.penezenka} Kč")
     print(f"Aktuální den: {aktualni_den}")
-    if obchodnik.lokace != vecerka:
-        print(f"Utopenec zde stojí: {obchodnik.lokace.predmet1.akt_cena} Kč")
-    if obchodnik.lokace != vecerka:
-        print(f"Med zde stojí: {obchodnik.lokace.predmet2.akt_cena} Kč")
-    if obchodnik.lokace != vecerka:
-        print(f"Láhev pálavy zde stojí: {obchodnik.lokace.predmet3.akt_cena} Kč")
+    for vypis in obchodnik.lokace.predmety:
+        if obchodnik.lokace != vecerka:
+            print(f"{vypis.nazev} zde stojí: {vypis.akt_cena} Kč")
+    #if obchodnik.lokace != vecerka:
+    #    print(f"{obchodnik.lokace.predmety[0].nazev} zde stojí: {obchodnik.lokace.predmety[0].akt_cena} Kč")
+    #if obchodnik.lokace != vecerka:
+    #    print(f"{obchodnik.lokace.predmety[1].nazev} zde stojí: {obchodnik.lokace.predmety[1].akt_cena} Kč")
+    #if obchodnik.lokace != vecerka:
+    #    print(f"{obchodnik.lokace.predmety[2].nazev} zde stojí: {obchodnik.lokace.predmety[2].akt_cena} Kč")
     print(f"U sebe máš: {obchodnik.predmety}")
     print(f"Počet předmětů je: {len(obchodnik.predmety)}/{max_predmetu}")
     cinnost = int(input(f"Co chceš dělat? \n"
@@ -63,25 +66,31 @@ while cinnost != 99:
             obchodnik.presun(hradcany)
             print(f"Přesunul jsi se na {nova_lokace}")
             aktualni_den += 1
-            obchodnik.lokace.predmet1.upravcenu()
-            obchodnik.lokace.predmet2.upravcenu()
-            obchodnik.lokace.predmet3.upravcenu()
+            for i in obchodnik.lokace.predmety:
+                i.upravcenu()
+            #obchodnik.lokace.predmety[0].upravcenu()
+            #obchodnik.lokace.predmety[1].upravcenu()
+            #obchodnik.lokace.predmety[2].upravcenu()
 
         if nova_lokace == 2:
             obchodnik.presun(vaclavak)
             print(f"Přesunul jsi se na {nova_lokace}")
             aktualni_den += 1
-            obchodnik.lokace.predmet1.upravcenu()
-            obchodnik.lokace.predmet2.upravcenu()
-            obchodnik.lokace.predmet3.upravcenu()
+            for i in obchodnik.lokace.predmety:
+                i.upravcenu()
+            #obchodnik.lokace.predmety[0].upravcenu()
+            #obchodnik.lokace.predmety[1].upravcenu()
+            #obchodnik.lokace.predmety[2].upravcenu()
 
         if nova_lokace == 3:
             obchodnik.presun(holesovice)
             print(f"Přesunul jsi se na {nova_lokace}")
             aktualni_den += 1
-            obchodnik.lokace.predmet1.upravcenu()
-            obchodnik.lokace.predmet2.upravcenu()
-            obchodnik.lokace.predmet3.upravcenu()
+            for i in obchodnik.lokace.predmety:
+                i.upravcenu()
+            #obchodnik.lokace.predmety[0].upravcenu()
+            #obchodnik.lokace.predmety[1].upravcenu()
+            #obchodnik.lokace.predmety[2].upravcenu()
 
         if nova_lokace == 4:
             obchodnik.presun(vecerka)
@@ -115,50 +124,50 @@ while cinnost != 99:
             print("Nemůžeš nakupovat, není místo v inventáři.")
         else:
             co_koupit = int(input(f"Co chceš koupit? Máš v peněžence {obchodnik.penezenka} Kč \n"
-                              f"1 - Utopenec za {obchodnik.lokace.predmet1.akt_cena}\n"
-                              f"2 - Med za {obchodnik.lokace.predmet2.akt_cena} \n"
-                              f"3 - Láhev pálavy za {obchodnik.lokace.predmet3.akt_cena}\n"))
+                              f"1 - Utopenec za {obchodnik.lokace.predmety[0].akt_cena}\n"
+                              f"2 - Med za {obchodnik.lokace.predmety[1].akt_cena} \n"
+                              f"3 - Láhev pálavy za {obchodnik.lokace.predmety[2].akt_cena}\n"))
 
             if co_koupit == 1:
-                if obchodnik.penezenka >= obchodnik.lokace.predmet1.akt_cena:
+                if obchodnik.penezenka >= obchodnik.lokace.predmety[0].akt_cena:
                     obchodnik.predmety.append("Utopenec")
-                    print(f"Nakoupil jsi 1 Utopenec za {obchodnik.lokace.predmet1.akt_cena}")
-                    obchodnik.penezenka -= obchodnik.lokace.predmet1.akt_cena
+                    print(f"Nakoupil jsi 1 Utopenec za {obchodnik.lokace.predmety[0].akt_cena}")
+                    obchodnik.penezenka -= obchodnik.lokace.predmety[0].akt_cena
                 else:
                     print(f"Na to nemáš!")
 
             if co_koupit == 2:
-                if obchodnik.penezenka >= obchodnik.lokace.predmet2.akt_cena:
+                if obchodnik.penezenka >= obchodnik.lokace.predmety[1].akt_cena:
                     obchodnik.predmety.append("Med")
-                    print(f"Nakoupil jsi 1 Med za {obchodnik.lokace.predmet2.akt_cena}")
-                    obchodnik.penezenka -= obchodnik.lokace.predmet2.akt_cena
+                    print(f"Nakoupil jsi 1 Med za {obchodnik.lokace.predmety[1].akt_cena}")
+                    obchodnik.penezenka -= obchodnik.lokace.predmety[1].akt_cena
                 else:
                     print(f"Na to nemáš!")
 
             if co_koupit == 3:
-                if obchodnik.penezenka >= obchodnik.lokace.predmet3.akt_cena:
+                if obchodnik.penezenka >= obchodnik.lokace.predmety[2].akt_cena:
                     obchodnik.predmety.append("Med")
-                    print(f"Nakoupil jsi 1 Med za {obchodnik.lokace.predmet3.akt_cena}")
-                    obchodnik.penezenka -= obchodnik.lokace.predmet3.akt_cena
+                    print(f"Nakoupil jsi 1 Med za {obchodnik.lokace.predmety[2].akt_cena}")
+                    obchodnik.penezenka -= obchodnik.lokace.predmety[2].akt_cena
                 else:
                     print(f"Na to nemáš!")
 
 
     if cinnost == 3: #prodej
         co_prodat = int(input(f"Co chceš prodat? U sebe máš {obchodnik.predmety} \n"
-                          f"1 - Utopenec za {obchodnik.lokace.predmet1.akt_cena}\n"
-                          f"2 - Med za {obchodnik.lokace.predmet2.akt_cena} \n"
-                          f"3 - Láhev pálavy za {obchodnik.lokace.predmet3.akt_cena}\n"))
+                          f"1 - Utopenec za {obchodnik.lokace.predmety[0].akt_cena}\n"
+                          f"2 - Med za {obchodnik.lokace.predmety[1].akt_cena} \n"
+                          f"3 - Láhev pálavy za {obchodnik.lokace.predmety[2].akt_cena}\n"))
 
         if co_prodat == 1:
             obchodnik.predmety.remove("Utopenec")
-            obchodnik.penezenka += obchodnik.lokace.predmet1.akt_cena
+            obchodnik.penezenka += obchodnik.lokace.predmety[0].akt_cena
         if co_prodat == 2:
             obchodnik.predmety.remove("Med")
-            obchodnik.penezenka += obchodnik.lokace.predmet2.akt_cena
+            obchodnik.penezenka += obchodnik.lokace.predmety[1].akt_cena
         if co_prodat == 3:
             obchodnik.predmety.remove("Láhev pálavy")
-            obchodnik.penezenka += obchodnik.lokace.predmet3.akt_cena
+            obchodnik.penezenka += obchodnik.lokace.predmety[2].akt_cena
 
     if cinnost == 99: #ukončení hry uživatelem
         print("Ukončil jsi hru!")
