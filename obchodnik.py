@@ -41,12 +41,7 @@ while cinnost != 99:
     for vypis in obchodnik.lokace.predmety:
         if obchodnik.lokace != vecerka:
             print(f"{vypis.nazev} zde stojí: {vypis.akt_cena} Kč")
-    #if obchodnik.lokace != vecerka:
-    #    print(f"{obchodnik.lokace.predmety[0].nazev} zde stojí: {obchodnik.lokace.predmety[0].akt_cena} Kč")
-    #if obchodnik.lokace != vecerka:
-    #    print(f"{obchodnik.lokace.predmety[1].nazev} zde stojí: {obchodnik.lokace.predmety[1].akt_cena} Kč")
-    #if obchodnik.lokace != vecerka:
-    #    print(f"{obchodnik.lokace.predmety[2].nazev} zde stojí: {obchodnik.lokace.predmety[2].akt_cena} Kč")
+
     print(f"U sebe máš: {obchodnik.predmety}")
     print(f"Počet předmětů je: {len(obchodnik.predmety)}/{max_predmetu}")
     cinnost = int(input(f"Co chceš dělat? \n"
@@ -68,9 +63,6 @@ while cinnost != 99:
             aktualni_den += 1
             for i in obchodnik.lokace.predmety:
                 i.upravcenu()
-            #obchodnik.lokace.predmety[0].upravcenu()
-            #obchodnik.lokace.predmety[1].upravcenu()
-            #obchodnik.lokace.predmety[2].upravcenu()
 
         if nova_lokace == 2:
             obchodnik.presun(vaclavak)
@@ -78,9 +70,6 @@ while cinnost != 99:
             aktualni_den += 1
             for i in obchodnik.lokace.predmety:
                 i.upravcenu()
-            #obchodnik.lokace.predmety[0].upravcenu()
-            #obchodnik.lokace.predmety[1].upravcenu()
-            #obchodnik.lokace.predmety[2].upravcenu()
 
         if nova_lokace == 3:
             obchodnik.presun(holesovice)
@@ -88,9 +77,6 @@ while cinnost != 99:
             aktualni_den += 1
             for i in obchodnik.lokace.predmety:
                 i.upravcenu()
-            #obchodnik.lokace.predmety[0].upravcenu()
-            #obchodnik.lokace.predmety[1].upravcenu()
-            #obchodnik.lokace.predmety[2].upravcenu()
 
         if nova_lokace == 4:
             obchodnik.presun(vecerka)
