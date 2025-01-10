@@ -1,5 +1,9 @@
+import random
+
+
 class Osoba:
-    def __init__(self, predmety, penezenka, lokace, kabat):
+    def __init__(self, nazev, predmety, penezenka, lokace, kabat):
+        self.nazev = nazev
         self.predmety = predmety
         self.penezenka = penezenka
         self.kabat = kabat
@@ -19,5 +23,15 @@ class Osoba:
 
     def presun(self, nova_lokace):
         self.lokace = nova_lokace
+
+    def aktualni_lokace(self):
+        print(self.lokace)
+
+    def printit(self):
+        print(self.nazev)
+        print(self.predmety)
+        print(self.penezenka)
+        print(self.lokace)
+        print(self.kabat)
 
 
