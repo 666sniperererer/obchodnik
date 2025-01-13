@@ -15,26 +15,22 @@ mas_kabat = 0
 global mas_batoh
 mas_batoh = 0
 
-hradcany = Lokace("Hradčany",
-                  [Predmet("Utopenec", 50, 100),
-                  Predmet("Med", 100, 200),
-                  Predmet("Láhev pálavy", 200,500)])
-vaclavak = Lokace("Václavák",
-                  [Predmet("Utopenec", 50, 100),
-                  Predmet("Med", 100, 200),
-                  Predmet("Láhev pálavy", 200,500)])
-holesovice = Lokace("Holešovice",
-                    [Predmet("Utopenec", 50, 100),
-                    Predmet("Med", 100, 200),
-                    Predmet("Láhev pálavy", 200,500)])
+utopenec = Predmet("Utopenec", 50, 100)
+med = Predmet("Med", 100, 200)
+palava = Predmet("Láhev pálavy", 200,500)
+
+hradcany = Lokace("Hradčany",[utopenec,med,palava])
+vaclavak = Lokace("Václavák",[utopenec,med,palava])
+holesovice = Lokace("Holešovice",[utopenec,med,palava])
 vecerka = Lokace("Večerka", [])
 
-obchodnik = Osoba(input("Jak se jmenuješ? "), [], 100, hradcany, 0)
+obchodnik = Osoba(input("Jak se jmenuješ? "), [], 1000, hradcany, 0)
 
 #hlavní cyklus
 cinnost = 0
 
 while cinnost != 99:
+    print("---------------------------")
     print(f"Nyní jsi v lokaci: {obchodnik.lokace}")
     print(f"V peněžence máš {obchodnik.penezenka} Kč")
     print(f"Aktuální den: {aktualni_den}")
@@ -89,6 +85,7 @@ while cinnost != 99:
             if koupit_inv == 1:
                 if obchodnik.penezenka >= 150 and mas_kabat == 0:
                     print("Koupil jsi kabát za 150, můžeš nosit +2 předměty")
+                    obchodnik.penezenka -= 150
                     max_predmetu += 2
                     mas_kabat = 1
                 else:
@@ -97,8 +94,9 @@ while cinnost != 99:
             if koupit_inv == 2:
                 if obchodnik.penezenka >= 400 and mas_batoh == 0:
                     print("Koupil jsi batoh za 400, můžeš nosit +3 předměty")
+                    obchodnik.penezenka -= 400
                     max_predmetu += 3
-                    mas_batoh = 0
+                    mas_batoh = 1
                 else:
                     print("Nelze, nemáš dost peněz, nebo už batoh máš!")
 
